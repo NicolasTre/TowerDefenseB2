@@ -12,17 +12,37 @@ public class TD_EnnemyMovement : MonoBehaviour
     private Transform _target;
     private int _pathIndex = 0;
 
+    private float _baseSpeed;
+
     private void Start()
     {
+        _baseSpeed = _moveSpeed;
         _target = TD_LevelManager.main.path[_pathIndex];
     }
 
     private void Update()
     {
+        FollowPath();
+    }
+
+    private void FixedUpdate()
+    {
+        MoveEnemy();
+    }
+
+    private void MoveEnemy() // method to move enemy
+    {
+        Vector2 direction = (_target.position - transform.position).normalized;
+
+        _rb.linearVelocity = direction * _moveSpeed;
+    }
+
+    private void FollowPath() // method for switch the path point and set the path point where enemy need to go
+    {
         if (Vector2.Distance(_target.position, transform.position) <= 0.1f)
         {
             _pathIndex++;
-            
+
 
             if (_pathIndex >= TD_LevelManager.main.path.Length)
             {
@@ -37,10 +57,13 @@ public class TD_EnnemyMovement : MonoBehaviour
         }
     }
 
-    private void FixedUpdate()
+    public void UpdateSpeed(float newSpeed)
     {
-        Vector2 direction = (_target.position - transform.position).normalized;
+        _moveSpeed = newSpeed;
+    }
 
-        _rb.linearVelocity = direction * _moveSpeed;
+    public void ResetSpped()
+    {
+        _moveSpeed = _baseSpeed;
     }
 }
