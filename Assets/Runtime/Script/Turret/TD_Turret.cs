@@ -1,8 +1,7 @@
-using UnityEngine;
-using UnityEditor;
-using UnityEngine.UI;
-using System;
 using TMPro;
+using UnityEditor;
+using UnityEngine;
+using UnityEngine.UI;
 
 public class TD_Turret : MonoBehaviour
 {
@@ -68,9 +67,11 @@ public class TD_Turret : MonoBehaviour
 
     private void Shoot()
     {
+        FindTarget();
         GameObject bullet = Instantiate(_bulletPrefab, _firingPoint.position, Quaternion.identity);
         TD_Bullet bulletScript = bullet.GetComponent<TD_Bullet>();
-        bulletScript.SetTarget(_targetTransform);    
+        bulletScript.SetTarget(_targetTransform.gameObject);
+
     }
 
     private void RotateTowardsTarget()
@@ -122,8 +123,7 @@ public class TD_Turret : MonoBehaviour
 
         CloseUpgradeUI();
 
-        _baseUpgradeCost = CalculateCost();
-        
+       _baseUpgradeCost = CalculateCost();
     }
 
     private int CalculateCost()

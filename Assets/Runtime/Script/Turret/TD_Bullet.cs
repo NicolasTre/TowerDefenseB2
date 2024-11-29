@@ -13,6 +13,7 @@ public class TD_Bullet : MonoBehaviour
     [SerializeField] private int _bulletDamage = 2;
 
     private Transform _target;
+    private GameObject _enemyTarget;
 
     private void FixedUpdate()
     {
@@ -26,7 +27,7 @@ public class TD_Bullet : MonoBehaviour
 
     private void MoveBullet()
     {
-        if (!_target)
+        if (!_enemyTarget)
         {
             return;
         }
@@ -36,9 +37,10 @@ public class TD_Bullet : MonoBehaviour
         _rb.linearVelocity = direction * _bulletSpeed;
     }
     
-    public void SetTarget(Transform target)
+    public void SetTarget(GameObject target)
     {
-        _target = target;
+        _target = target.transform;
+        _enemyTarget = target;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)

@@ -1,4 +1,5 @@
 using System.Collections;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -14,6 +15,8 @@ public class TD_EnnemySpawner : MonoBehaviour
     [SerializeField] private float _timeBetweenWaves = 5f;
     [SerializeField] private float _hitPointIncreasePerWave = 0.5f;
     [SerializeField] private float _difficultyScalingFactor = 0.75f;
+    [SerializeField] private TextMeshProUGUI _currentWaveText;
+    [SerializeField] private Animator _animCurrentWaves;
 
     [Header("Events")]
     public static UnityEvent _onEnemyDestroy = new UnityEvent();
@@ -64,6 +67,9 @@ public class TD_EnnemySpawner : MonoBehaviour
         _isSpawning = true;
         _enemiesLeftToSpawn = EnemiesPerWave();
         eps = EnemiesPerSecond();
+        _currentWaveText.text = ("Wave : " + _currentWave);
+        _animCurrentWaves.Play("AnimText");
+
     }
 
     private void SpawnEnemy()

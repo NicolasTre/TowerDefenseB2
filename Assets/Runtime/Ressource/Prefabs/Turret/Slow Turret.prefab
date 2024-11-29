@@ -712,8 +712,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   _targetInRange: 3
-  _attackSpeed: 0.5
-  _freezeTime: 1
+  _attackSpeed: 0.25
+  _freezeTime: 0.5
 --- !u!1 &6448619558778762524
 GameObject:
   m_ObjectHideFlags: 0

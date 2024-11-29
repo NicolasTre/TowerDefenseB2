@@ -1,11 +1,18 @@
+using TMPro;
 using UnityEngine;
 
 public class TD_LevelManager : MonoBehaviour
 {
+    [SerializeField] private TextMeshProUGUI _lifeText;
+
     public static TD_LevelManager main;
 
     public Transform startPoint; 
     public Transform[] path;
+    public int life = 3;
+
+    public Animator loseLifeAnim;
+    public Animator loseLifeTextAnim;
 
     public int currency;
 
@@ -17,7 +24,17 @@ public class TD_LevelManager : MonoBehaviour
 
     private void Start()
     {
-        currency = 50;
+        currency = 100;
+    }
+
+    private void Update()
+    {
+        _lifeText.text = ("Life : " + life.ToString());
+
+        if (life <= 0)
+        {
+            LevelLose();
+        }
     }
 
     public void IncreaseCurrency(int amount)
@@ -38,10 +55,10 @@ public class TD_LevelManager : MonoBehaviour
             Debug.Log("no enought");
             return false;
         }
-            
-
-        
     }
 
+    private void LevelLose()
+    {
 
+    }
 }

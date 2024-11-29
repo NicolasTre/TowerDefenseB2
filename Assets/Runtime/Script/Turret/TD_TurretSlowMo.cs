@@ -1,7 +1,6 @@
-using System;
 using System.Collections;
-using UnityEngine;
 using UnityEditor;
+using UnityEngine;
 
 public class TD_TurretSlowMo : MonoBehaviour
 {
@@ -17,6 +16,7 @@ public class TD_TurretSlowMo : MonoBehaviour
 
     private void Update()
     {
+        print("caca");
         _timeUntilFire += Time.deltaTime;
 
         if (_timeUntilFire >= 1f / _attackSpeed)

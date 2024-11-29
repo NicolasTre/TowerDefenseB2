@@ -1,7 +1,9 @@
+using System.Collections;
 using UnityEngine;
 
 public class TD_EnnemyMovement : MonoBehaviour
 {
+
     [Header("Reference")]
     [SerializeField] private Rigidbody2D _rb;
 
@@ -47,6 +49,9 @@ public class TD_EnnemyMovement : MonoBehaviour
             if (_pathIndex >= TD_LevelManager.main.path.Length)
             {
                 TD_EnnemySpawner._onEnemyDestroy.Invoke();
+                TD_LevelManager.main.loseLifeAnim.Play("LoseLifeAnim");
+                TD_LevelManager.main.life--;
+                TD_LevelManager.main.loseLifeTextAnim.Play("LoseLifeTextAnim");
                 Destroy(gameObject);
                 return;
             }
