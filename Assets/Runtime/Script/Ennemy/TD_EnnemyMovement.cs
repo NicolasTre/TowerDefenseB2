@@ -1,4 +1,3 @@
-using System.Collections;
 using UnityEngine;
 
 public class TD_EnnemyMovement : MonoBehaviour
@@ -67,7 +66,7 @@ public class TD_EnnemyMovement : MonoBehaviour
         _moveSpeed = newSpeed;
     }
 
-    public void ResetSpped()
+    public void ResetSpeed()
     {
         _moveSpeed = _baseSpeed;
     }

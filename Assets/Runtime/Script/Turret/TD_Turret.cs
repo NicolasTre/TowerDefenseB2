@@ -115,7 +115,6 @@ public class TD_Turret : MonoBehaviour
         if (_baseUpgradeCost > TD_LevelManager.main.currency) return;
 
         TD_LevelManager.main.SpendCurrency(CalculateCost());
-
         level++;
 
         _bulletPerSecond = CalculateBPS();

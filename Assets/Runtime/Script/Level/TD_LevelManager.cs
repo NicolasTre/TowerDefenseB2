@@ -4,6 +4,7 @@ using UnityEngine;
 public class TD_LevelManager : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI _lifeText;
+    [SerializeField] private GameObject _LoseCanvas;
 
     public static TD_LevelManager main;
 
@@ -59,6 +60,6 @@ public class TD_LevelManager : MonoBehaviour
 
     private void LevelLose()
     {
-
+        _LoseCanvas.SetActive(true);
     }
 }

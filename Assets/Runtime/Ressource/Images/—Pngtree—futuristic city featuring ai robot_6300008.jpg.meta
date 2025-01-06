@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: c0d53d7626e02444681981c2873e2ffe
+guid: f3da4791b2a79bc49982932fa2a47ab8
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 5550454475440263237
-    second: buttonShop_0
+      213: -4314296940306703981
+    second: "\u2014Pngtree\u2014futuristic city featuring ai robot_6300008_0"
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -113,13 +113,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: buttonShop_0
+      name: "\u2014Pngtree\u2014futuristic city featuring ai robot_6300008_0"
       rect:
         serializedVersion: 2
         x: 0
-        y: 26
-        width: 96
-        height: 50
+        y: 0
+        width: 5824
+        height: 3264
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 540189610fc270d40800000000000000
-      internalID: 5550454475440263237
+      spriteID: 399d6797ac98024c0800000000000000
+      internalID: -4314296940306703981
       vertices: []
       indices: 
       edges: []
@@ -147,8 +147,7 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable:
-      buttonShop_0: 5550454475440263237
+    nameFileIdTable: {}
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

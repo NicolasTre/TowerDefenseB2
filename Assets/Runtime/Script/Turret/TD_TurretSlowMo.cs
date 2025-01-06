@@ -16,7 +16,6 @@ public class TD_TurretSlowMo : MonoBehaviour
 
     private void Update()
     {
-        print("caca");
         _timeUntilFire += Time.deltaTime;
 
         if (_timeUntilFire >= 1f / _attackSpeed)
@@ -47,7 +46,7 @@ public class TD_TurretSlowMo : MonoBehaviour
     private IEnumerator ResetEnnemySpeed(TD_EnnemyMovement em)
     {
         yield return new WaitForSeconds(_freezeTime);
-        em.ResetSpped();
+        em.ResetSpeed();
     }
 
     private void OnDrawGizmosSelected()
