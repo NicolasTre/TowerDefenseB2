@@ -1,3 +1,4 @@
+using System.Linq;
 using TMPro;
 using UnityEditor;
 using UnityEngine;
@@ -13,6 +14,8 @@ public class TD_Turret : MonoBehaviour
     [SerializeField] private GameObject _upgradeUI;
     [SerializeField] private Button _upgradeButton;
     [SerializeField] private TextMeshProUGUI _costUpgrade;
+    [SerializeField] private AudioClip _shootSound;
+    [SerializeField] private AudioClip _upgradeSound;
 
 
     [Header("Attributes")]
@@ -23,7 +26,7 @@ public class TD_Turret : MonoBehaviour
 
     private float _bpsBase;
     private float _targetingRangeBase;
-
+    private Transform _currentTargetForRotation;
 
     private Transform _targetTransform;
     private float _timeUntilFire;
@@ -48,48 +51,76 @@ public class TD_Turret : MonoBehaviour
 
         RotateTowardsTarget();
 
-        if (!CheckTargetIsInRange())
+        if (_targetTransform == null || !CheckTargetIsInRange())
         {
-            _targetTransform = null;
+            FindTarget();
+            return;
         }
         else
         {
-            _timeUntilFire += Time.deltaTime;
-
-            if(_timeUntilFire >= 1f / _bulletPerSecond)
+            if (_targetTransform != null && IsRotationAligned())
             {
-                Shoot();
-                _timeUntilFire = 0f;
+                _timeUntilFire += Time.deltaTime;
+
+                if (_timeUntilFire >= 1f / _bulletPerSecond)
+                {
+                    Shoot();
+                    _timeUntilFire = 0f;
+                }
             }
         }
-
     }
 
     private void Shoot()
     {
+        TD_AudioManager.instance.PlayClipAt(_shootSound, transform.position);
         FindTarget();
         GameObject bullet = Instantiate(_bulletPrefab, _firingPoint.position, Quaternion.identity);
         TD_Bullet bulletScript = bullet.GetComponent<TD_Bullet>();
         bulletScript.SetTarget(_targetTransform.gameObject);
-
     }
 
     private void RotateTowardsTarget()
     {
-        float angle = Mathf.Atan2(_targetTransform.position.y - transform.position.y, _targetTransform.position.x - transform.position.x) * Mathf.Rad2Deg - 90f; 
+        if (_currentTargetForRotation == null || _currentTargetForRotation != _targetTransform)
+        {
+            _currentTargetForRotation = _targetTransform;
+        }
 
-        Quaternion targetRotation = Quaternion.Euler(new Vector3(0f, 0f, angle));
+        Vector3 direction = _currentTargetForRotation.position - _turretRotationPoint.position;
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg - 90f;
 
-        _turretRotationPoint.rotation = Quaternion.RotateTowards(_turretRotationPoint.rotation, targetRotation, _rotationSpeed * Time.deltaTime);
+        Quaternion targetRotation = Quaternion.Euler(0f, 0f, angle);
+
+        _turretRotationPoint.rotation = Quaternion.RotateTowards(
+            _turretRotationPoint.rotation,
+            targetRotation,
+            _rotationSpeed * Time.deltaTime
+        );
     }
-        
+
+    private bool IsRotationAligned()
+    {
+        if (_targetTransform == null) return false;
+
+        Vector3 direction = _targetTransform.position - _turretRotationPoint.position;
+        float targetAngle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg - 90f;
+
+        float angleDifference = Mathf.Abs(Mathf.DeltaAngle(_turretRotationPoint.eulerAngles.z, targetAngle));
+
+        return angleDifference < 5f;
+    }
+
     private void FindTarget()
     {
-        RaycastHit2D[] hits = Physics2D.CircleCastAll(transform.position, _targetInRange, (Vector2)transform.position, 0f, _enemiesMask);
+        RaycastHit2D[] hits = Physics2D.CircleCastAll(transform.position, _targetInRange, Vector2.zero, 0f, _enemiesMask);
 
         if (hits.Length > 0)
         {
-            _targetTransform = hits[0].transform;
+            // Trier les cibles par distance
+            _targetTransform = hits
+                .OrderBy(hit => Vector2.Distance(hit.transform.position, transform.position))
+                .First().transform;
         }
     }
 
@@ -114,6 +145,7 @@ public class TD_Turret : MonoBehaviour
     {
         if (_baseUpgradeCost > TD_LevelManager.main.currency) return;
 
+        TD_AudioManager.instance.PlayClipAt(_upgradeSound, transform.position);
         TD_LevelManager.main.SpendCurrency(CalculateCost());
         level++;
 

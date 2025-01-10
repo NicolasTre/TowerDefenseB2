@@ -2,13 +2,16 @@ using UnityEngine;
 
 public class TD_Enemy : MonoBehaviour
 {
+    [Header("References")]
+    [SerializeField] private AudioClip _audioDeath;
+
     [Header("Attributes")]
     [SerializeField] private float _hitPoints;
-    [SerializeField] private int _currencyWorth;
-
+    public int _currencyWorth;
+    public int CurrencyWorth => _currencyWorth;
     private bool _isDestroyed = false;
 
-    public void TakeDamage(int damage) // function call when a bullet hit a enemy
+    public void TakeDamage(float damage) // function call when a bullet hit a enemy
     {
         _hitPoints -= damage;
 
@@ -16,7 +19,9 @@ public class TD_Enemy : MonoBehaviour
         {
             TD_EnnemySpawner._onEnemyDestroy.Invoke();
             TD_LevelManager.main.IncreaseCurrency(_currencyWorth);
+            TD_EnemyManager.Instance.RemoveEnemy(gameObject);
             _isDestroyed = true;
+            TD_AudioManager.instance.PlayClipAt(_audioDeath, transform.position);
             Destroy(gameObject);
             //StartCoroutine(DestroyParticles());
         }
@@ -26,16 +31,4 @@ public class TD_Enemy : MonoBehaviour
     {
         _hitPoints += amount;
     }
-
-    /*
-     private IEnumerator DestroyParticles() // function for destroy the clone particles when a enemy die
-    {
-
-        gameObject.layer = 0;
-        GetComponent<SpriteRenderer>().enabled = false;
-        yield return new WaitForSeconds(waitTime);
-        
-        //yield return null;
-    }
-    */
 }

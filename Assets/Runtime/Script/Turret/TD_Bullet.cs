@@ -10,7 +10,7 @@ public class TD_Bullet : MonoBehaviour
 
     [Header("Attributes")]
     [SerializeField] private float _bulletSpeed = 5f;
-    [SerializeField] private int _bulletDamage = 2;
+    [SerializeField] private float _bulletDamage = 2;
 
     private Transform _target;
     private GameObject _enemyTarget;

@@ -4,8 +4,9 @@ using UnityEngine;
 public class TD_LevelManager : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI _lifeText;
-    [SerializeField] private GameObject _LoseCanvas;
-
+    [SerializeField] private GameObject _loseCanvas;
+    [SerializeField] private GameObject _powerUpCanvas;
+    [SerializeField] private AudioClip _loseGameAudio;
     public static TD_LevelManager main;
 
     public Transform startPoint; 
@@ -17,6 +18,7 @@ public class TD_LevelManager : MonoBehaviour
 
     public int currency;
 
+    private bool _lvlFinish = false;
 
     private void Awake()
     {
@@ -32,9 +34,11 @@ public class TD_LevelManager : MonoBehaviour
     {
         _lifeText.text = ("Life : " + life.ToString());
 
-        if (life <= 0)
+        if (life <= 0 && !_lvlFinish)
         {
             LevelLose();
+            _lvlFinish = true;
+            return;
         }
     }
 
@@ -60,6 +64,9 @@ public class TD_LevelManager : MonoBehaviour
 
     private void LevelLose()
     {
-        _LoseCanvas.SetActive(true);
+        Time.timeScale = 0f;
+        _powerUpCanvas.SetActive(false);
+        _loseCanvas.SetActive(true);
+        TD_AudioManager.instance.PlayClipAt(_loseGameAudio,transform.position);
     }
 }

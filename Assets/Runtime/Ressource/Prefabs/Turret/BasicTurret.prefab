@@ -675,9 +675,11 @@ MonoBehaviour:
   _upgradeUI: {fileID: 9208828711478376229}
   _upgradeButton: {fileID: 484909132234283798}
   _costUpgrade: {fileID: 4435076866485748764}
+  _shootSound: {fileID: 8300000, guid: ed20f895ae1037d4c84e20724bca7d9b, type: 3}
+  _upgradeSound: {fileID: 8300000, guid: 068b982994f3ba14c98813b50857a8aa, type: 3}
   _targetInRange: 3
-  _rotationSpeed: 250
-  _bulletPerSecond: 1.5
+  _rotationSpeed: 500
+  _bulletPerSecond: 1
   _baseUpgradeCost: 50
 --- !u!1 &8467646759058347519
 GameObject:

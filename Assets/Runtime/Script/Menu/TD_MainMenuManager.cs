@@ -9,6 +9,7 @@ public class TD_MainMenuManager : MonoBehaviour
     [SerializeField] private GameObject _mainMenu;
     [SerializeField] private GameObject _creditsMenu;
     [SerializeField] private GameObject _leaveConfirmMenu;
+    [SerializeField] private AudioClip _buttonAudio;
 
 
     public void OnPLayButton(string _nameScene)
@@ -43,7 +44,7 @@ public class TD_MainMenuManager : MonoBehaviour
     private IEnumerator AnimTransi(GameObject _currentScene, GameObject _nextScene)
     {
         AnimatorStateInfo stateInfo = _animTransiMenu.GetCurrentAnimatorStateInfo(0);
-
+        TD_AudioManager.instance.PlayClipAt(_buttonAudio, transform.position);
         float animationDuration = stateInfo.length;
         _animTransiMenu.Play("PanelAnimTransiOff");
         yield return new WaitForSeconds(2f);

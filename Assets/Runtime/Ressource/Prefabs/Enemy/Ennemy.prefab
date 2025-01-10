@@ -142,7 +142,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _rb: {fileID: 704650002047650840}
-  _loseLifeAnim: {fileID: 0}
+  _loseLifeAudio: {fileID: 8300000, guid: 71326f94192ef024da735eb4c13e3d77, type: 3}
   _moveSpeed: 2
 --- !u!50 &704650002047650840
 Rigidbody2D:
@@ -183,6 +183,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14c20a62385d45d4db43d096606479af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _audioDeath: {fileID: 8300000, guid: 37e721ec84d558b4c9b4d637873374a6, type: 3}
   _hitPoints: 1
   _currencyWorth: 5
 --- !u!198 &8493201683737258589

@@ -7,6 +7,10 @@ public class TD_EnnemySpawner : MonoBehaviour
 {
     [Header("References")]
     [SerializeField] private GameObject[] _enemyPrefabs;
+    [SerializeField] private TextMeshProUGUI _currentWaveText;
+    [SerializeField] private Animator _animCurrentWaves;
+    [SerializeField] private AudioClip _nextWavesAudio;
+
 
     [Header("Attributes")]
     [SerializeField] private int _baseEnemies = 8;
@@ -15,15 +19,14 @@ public class TD_EnnemySpawner : MonoBehaviour
     [SerializeField] private float _timeBetweenWaves = 5f;
     [SerializeField] private float _hitPointIncreasePerWave = 0.5f;
     [SerializeField] private float _difficultyScalingFactor = 0.75f;
-    [SerializeField] private TextMeshProUGUI _currentWaveText;
-    [SerializeField] private Animator _animCurrentWaves;
+
 
     [Header("Events")]
     public static UnityEvent _onEnemyDestroy = new UnityEvent();
+    public int _enemiesAlive;
 
     private int _currentWave = 1;
     private float _timeSinceLastSpawn;
-    private int _enemiesAlive;
     private int _enemiesLeftToSpawn;
     private float eps; // enemy per second
     private bool _isSpawning = false;
@@ -46,6 +49,11 @@ public class TD_EnnemySpawner : MonoBehaviour
         }
         _timeSinceLastSpawn += Time.deltaTime;
 
+        CheckEnemyAlive();
+    }
+
+    public void CheckEnemyAlive()
+    {
         if (_timeSinceLastSpawn >= (1f / eps) && _enemiesLeftToSpawn > 0)
         {
             SpawnEnemy();
@@ -69,15 +77,18 @@ public class TD_EnnemySpawner : MonoBehaviour
         eps = EnemiesPerSecond();
         _currentWaveText.text = ("Wave : " + _currentWave);
         _animCurrentWaves.Play("AnimText");
+        TD_AudioManager.instance.PlayClipAt(_nextWavesAudio, transform.position);
 
     }
 
-    private void SpawnEnemy()
+    private void SpawnEnemy() // spawn my ennemy with random and add in a list 
     {
         int index = Random.Range(0, _enemyPrefabs.Length);
         GameObject prefabToSpawn = _enemyPrefabs[index];
 
         GameObject enemyInstance = Instantiate(prefabToSpawn, TD_LevelManager.main.startPoint.position, Quaternion.identity);
+
+        TD_EnemyManager.Instance.AddEnemy(enemyInstance);
 
         TD_Enemy enemy = enemyInstance.GetComponent<TD_Enemy>();
         if (enemy != null)
