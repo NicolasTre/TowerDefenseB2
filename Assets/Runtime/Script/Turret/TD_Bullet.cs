@@ -36,7 +36,7 @@ public class TD_Bullet : MonoBehaviour
 
         _rb.linearVelocity = direction * _bulletSpeed;
     }
-    
+
     public void SetTarget(GameObject target)
     {
         _target = target.transform;

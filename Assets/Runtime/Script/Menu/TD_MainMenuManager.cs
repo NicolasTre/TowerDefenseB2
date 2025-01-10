@@ -25,12 +25,12 @@ public class TD_MainMenuManager : MonoBehaviour
     {
         StartCoroutine(AnimTransi(_creditsMenu, _mainMenu));
     }
-    
+
     public void AnimTransiLeaveOn()
     {
         StartCoroutine(AnimTransi(_mainMenu, _leaveConfirmMenu));
     }
-    
+
     public void AnimTransiLeaveOff()
     {
         StartCoroutine(AnimTransi(_leaveConfirmMenu, _mainMenu));

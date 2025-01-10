@@ -8,7 +8,7 @@ public class TD_BuildManager : MonoBehaviour
     [SerializeField] private TD_Tower[] _towers;
     [SerializeField] private GameObject[] _towerCanvasSelected;
     [SerializeField] private Animator _animCanvas;
-     private GameObject _towerSelected;
+    private GameObject _towerSelected;
 
     private int selectedTower = 0;
     private void Awake()

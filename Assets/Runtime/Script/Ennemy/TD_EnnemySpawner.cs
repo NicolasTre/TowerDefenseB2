@@ -93,7 +93,7 @@ public class TD_EnnemySpawner : MonoBehaviour
         TD_Enemy enemy = enemyInstance.GetComponent<TD_Enemy>();
         if (enemy != null)
         {
-            float bonusHitPoints = _hitPointIncreasePerWave * (_currentWave - 1); 
+            float bonusHitPoints = _hitPointIncreasePerWave * (_currentWave - 1);
             enemy.AddHitPoints(bonusHitPoints);
         }
     }

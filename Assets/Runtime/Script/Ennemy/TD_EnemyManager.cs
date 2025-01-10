@@ -55,7 +55,7 @@ public class TD_EnemyManager : MonoBehaviour
         {
             Debug.Log("La bombe est en recharge. Patientez avant de l'utiliser à nouveau.");
             TD_AudioManager.instance.PlayClipAt(_errorBombAudio, transform.position);
-            return; 
+            return;
         }
 
         TD_AudioManager.instance.PlayClipAt(_boomAudio, transform.position);
