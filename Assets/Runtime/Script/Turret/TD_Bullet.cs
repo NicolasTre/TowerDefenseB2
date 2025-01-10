@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class TD_Bullet : MonoBehaviour
@@ -9,32 +10,48 @@ public class TD_Bullet : MonoBehaviour
 
     [Header("Attributes")]
     [SerializeField] private float _bulletSpeed = 5f;
+    [SerializeField] private float _bulletDamage = 2;
 
     private Transform _target;
-
-    private void Start()
-    {
-        if(_rb == null)
-        {
-            _rb = GetComponent<Rigidbody2D>();
-        }
-    }
+    private GameObject _enemyTarget;
 
     private void FixedUpdate()
     {
-        Vector2 direction = (_target.position - transform.position).normalized;  
+        MoveBullet();
+    }
+
+    private void Update()
+    {
+        StartCoroutine(DestroyBulletAfterTime());
+    }
+
+    private void MoveBullet()
+    {
+        if (!_enemyTarget)
+        {
+            return;
+        }
+
+        Vector2 direction = (_target.position - transform.position).normalized;
 
         _rb.linearVelocity = direction * _bulletSpeed;
     }
-
-
-    public void SetTarget(Transform target)
+    
+    public void SetTarget(GameObject target)
     {
-        target = _target;
+        _target = target.transform;
+        _enemyTarget = target;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        collision.gameObject.GetComponent<TD_Enemy>().TakeDamage(_bulletDamage);
+        Destroy(gameObject);
+    }
+
+    private IEnumerator DestroyBulletAfterTime()
+    {
+        yield return new WaitForSeconds(2.5f);
         Destroy(gameObject);
     }
 }
