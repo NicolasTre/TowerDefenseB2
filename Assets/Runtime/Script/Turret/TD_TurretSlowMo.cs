@@ -48,10 +48,4 @@ public class TD_TurretSlowMo : MonoBehaviour
         yield return new WaitForSeconds(_freezeTime);
         em.ResetSpeed();
     }
-
-    private void OnDrawGizmosSelected()
-    {
-        Handles.color = Color.cyan;
-        Handles.DrawWireDisc(transform.position, transform.forward, _targetInRange);
-    }
 }

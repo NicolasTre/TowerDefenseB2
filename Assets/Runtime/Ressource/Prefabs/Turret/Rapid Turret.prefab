@@ -874,7 +874,7 @@ MonoBehaviour:
   _upgradeSound: {fileID: 8300000, guid: 068b982994f3ba14c98813b50857a8aa, type: 3}
   _targetInRange: 3
   _rotationSpeed: 500
-  _bulletPerSecond: 1.5
+  _bulletPerSecond: 1.75
   _baseUpgradeCost: 75
 --- !u!1 &6458445595698013872
 GameObject:

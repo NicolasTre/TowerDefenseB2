@@ -171,10 +171,4 @@ public class TD_Turret : MonoBehaviour
     {
         return _targetingRangeBase * Mathf.Pow(level, 0.5f);
     }
-
-    private void OnDrawGizmosSelected()
-    {
-        Handles.color = Color.cyan;
-        Handles.DrawWireDisc(transform.position, transform.forward, _targetInRange);
-    }
 }
