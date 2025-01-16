@@ -9,8 +9,8 @@ public class TD_UpgradeHanglerUI : MonoBehaviour, IPointerEnterHandler, IPointer
     {
         _mouseOver = true;
         TD_UIManager.main.SetHoveringState(true);
-    }  
-        
+    }
+
     public void OnPointerExit(PointerEventData eventData)
     {
         _mouseOver = false;

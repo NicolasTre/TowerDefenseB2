@@ -26,7 +26,7 @@ public class TD_Plot : MonoBehaviour
 
     private void OnMouseExit()
     {
-       _sr.color = _startColor;
+        _sr.color = _startColor;
     }
 
     private void OnMouseDown()
@@ -36,7 +36,7 @@ public class TD_Plot : MonoBehaviour
             return;
         }
 
-        if (_towerObj != null & turretSlowMo == null) 
+        if (_towerObj != null & turretSlowMo == null)
         {
             turret.OpenUpgradeUI();
             return;
@@ -46,10 +46,10 @@ public class TD_Plot : MonoBehaviour
 
         if (towerToBuild.cost > TD_LevelManager.main.currency)
         {
-            return; 
+            return;
         }
 
-        TD_LevelManager.main.SpendCurrency(towerToBuild.cost);  
+        TD_LevelManager.main.SpendCurrency(towerToBuild.cost);
         _towerObj = Instantiate(towerToBuild.prefab, transform.position, Quaternion.identity);
         TD_AudioManager.instance.PlayClipAt(_constructionAudio, transform.position);
         turret = _towerObj.GetComponent<TD_Turret>();

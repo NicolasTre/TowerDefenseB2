@@ -51,7 +51,7 @@ public class TD_AudioManager : MonoBehaviour
         audioSource.clip = clip;
         audioSource.outputAudioMixerGroup = _soundEffectMixer;
         audioSource.Play();
-        Destroy(tempGO,clip.length);
+        Destroy(tempGO, clip.length);
         return audioSource;
     }
 }

@@ -1,5 +1,5 @@
-using UnityEngine;
 using TMPro;
+using UnityEngine;
 public class TD_Menu : MonoBehaviour
 {
 
@@ -17,6 +17,6 @@ public class TD_Menu : MonoBehaviour
 
     private void OnGUI()
     {
-        currencyUI.text = ("Money : " + TD_LevelManager.main.currency.ToString());   
+        currencyUI.text = ("Money : " + TD_LevelManager.main.currency.ToString());
     }
 }

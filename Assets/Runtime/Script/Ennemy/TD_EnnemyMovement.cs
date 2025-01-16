@@ -6,7 +6,7 @@ public class TD_EnnemyMovement : MonoBehaviour
     [Header("Reference")]
     [SerializeField] private Rigidbody2D _rb;
     [SerializeField] private AudioClip _loseLifeAudio;
-    
+
 
 
     [Header("Attributes")]

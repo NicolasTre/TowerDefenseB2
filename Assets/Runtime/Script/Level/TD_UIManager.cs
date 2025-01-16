@@ -1,4 +1,3 @@
-using TMPro;
 using UnityEngine;
 
 public class TD_UIManager : MonoBehaviour
@@ -12,7 +11,7 @@ public class TD_UIManager : MonoBehaviour
         main = this;
     }
 
-    public  void SetHoveringState(bool state)
+    public void SetHoveringState(bool state)
     {
         _isHoveringUI = state;
     }

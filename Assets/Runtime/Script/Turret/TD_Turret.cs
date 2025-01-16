@@ -134,7 +134,7 @@ public class TD_Turret : MonoBehaviour
         _upgradeUI.SetActive(true);
         _costUpgrade.text = ("Cost : " + _baseUpgradeCost);
     }
-    
+
     public void CloseUpgradeUI()
     {
         _upgradeUI.SetActive(false);
@@ -154,27 +154,21 @@ public class TD_Turret : MonoBehaviour
 
         CloseUpgradeUI();
 
-       _baseUpgradeCost = CalculateCost();
+        _baseUpgradeCost = CalculateCost();
     }
 
     private int CalculateCost()
     {
-        return Mathf.RoundToInt(_baseUpgradeCost * Mathf.Pow(level, 0.8f)); 
+        return Mathf.RoundToInt(_baseUpgradeCost * Mathf.Pow(level, 0.8f));
     }
-    
+
     private float CalculateBPS() // bullet per second
     {
-        return _bpsBase * Mathf.Pow(level, 0.5f); 
+        return _bpsBase * Mathf.Pow(level, 0.5f);
     }
 
     private float CalculateRange()
     {
         return _targetingRangeBase * Mathf.Pow(level, 0.5f);
-    }
-
-    private void OnDrawGizmosSelected()
-    {
-        Handles.color = Color.cyan;
-        Handles.DrawWireDisc(transform.position, transform.forward, _targetInRange); 
     }
 }

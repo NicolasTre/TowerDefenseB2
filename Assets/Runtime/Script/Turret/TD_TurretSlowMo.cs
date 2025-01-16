@@ -12,7 +12,7 @@ public class TD_TurretSlowMo : MonoBehaviour
     [SerializeField] private float _attackSpeed = 4f;
     [SerializeField] private float _freezeTime = 1f;
 
-    private float _timeUntilFire; 
+    private float _timeUntilFire;
 
     private void Update()
     {
@@ -23,16 +23,16 @@ public class TD_TurretSlowMo : MonoBehaviour
             FreezeEnemies();
             _timeUntilFire = 0f;
         }
-        
+
     }
 
     private void FreezeEnemies()
     {
         RaycastHit2D[] hits = Physics2D.CircleCastAll(transform.position, _targetInRange, (Vector2)transform.position, 0f, _enemiesMask);
 
-        if (hits.Length > 0 )
+        if (hits.Length > 0)
         {
-            for(int i = 0; i < hits.Length; i++)
+            for (int i = 0; i < hits.Length; i++)
             {
                 RaycastHit2D hit = hits[i];
 
@@ -47,11 +47,5 @@ public class TD_TurretSlowMo : MonoBehaviour
     {
         yield return new WaitForSeconds(_freezeTime);
         em.ResetSpeed();
-    }
-
-    private void OnDrawGizmosSelected()
-    {
-        Handles.color = Color.cyan;
-        Handles.DrawWireDisc(transform.position, transform.forward, _targetInRange);
     }
 }

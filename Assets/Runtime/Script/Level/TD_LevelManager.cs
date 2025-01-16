@@ -9,7 +9,7 @@ public class TD_LevelManager : MonoBehaviour
     [SerializeField] private AudioClip _loseGameAudio;
     public static TD_LevelManager main;
 
-    public Transform startPoint; 
+    public Transform startPoint;
     public Transform[] path;
     public int life = 3;
 
@@ -22,7 +22,7 @@ public class TD_LevelManager : MonoBehaviour
 
     private void Awake()
     {
-        main = this; 
+        main = this;
     }
 
     private void Start()
@@ -46,7 +46,7 @@ public class TD_LevelManager : MonoBehaviour
     {
         currency += amount;
     }
-    
+
     public bool SpendCurrency(int amount)
     {
         if (amount <= currency)
@@ -67,6 +67,6 @@ public class TD_LevelManager : MonoBehaviour
         Time.timeScale = 0f;
         _powerUpCanvas.SetActive(false);
         _loseCanvas.SetActive(true);
-        TD_AudioManager.instance.PlayClipAt(_loseGameAudio,transform.position);
+        TD_AudioManager.instance.PlayClipAt(_loseGameAudio, transform.position);
     }
 }
